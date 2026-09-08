@@ -1,0 +1,25 @@
+"""
+Author: Desi D WhiteCliffe
+Student_ID: 20267349
+Course: IT5016-Software_Development
+
+"""
+
+
+class Ticket:
+#create a class called Ticket with attributes ticket_id, ticket_price, and status    
+    def __init__(self, ticket_id, ticket_price, status):
+    #define the attributes using function parameters
+        self.ticket_id = ticket_id
+        self.ticket_price = ticket_price
+        self.status = status
+
+    def display(self):
+    #define a method to display the ticket information
+        print(f"Ticket ID: {self.ticket_id}")
+        print(f"Ticket Price: ${self.ticket_price:.2f}")
+        print(f"Status: {self.status}")
+
+# Example usage:
+ticket1 = Ticket(101, 50.0, "Available")
+ticket1.display()   

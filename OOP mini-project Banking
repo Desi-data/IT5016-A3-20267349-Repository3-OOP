@@ -1,0 +1,73 @@
+"""
+Author: Desi D WhiteCliffe
+Student_ID: 20267349
+Course: IT5016-Software_Development
+
+Simple Banking System Design
+Object Oriented OOP programming
+
+"""
+#define the classes and methods for the banking system
+#create a class for the bank account
+class BankAccount:
+    def __init__(self, account_number, account_holder, initial_balance=0):
+        self.account_number = account_number
+        self.account_holder = account_holder
+        self.balance = initial_balance
+
+    def deposit(self, amount):
+        self.balance += amount
+
+    def withdraw(self, amount):
+        if self.balance >= amount:
+            self.balance -= amount
+        else:
+            print("Insufficient funds")
+
+    def get_balance(self):
+        return self.balance
+
+    #display the account information
+    def display_account_info(self):
+        print(f"Account Number: {self.account_number}")
+        print(f"Account Holder: {self.account_holder}")
+        print(f"Balance: ${self.balance:.2f}")
+
+
+#define a class for the transaction
+class Transaction:
+    def __init__(self, account, transaction_type, amount):
+        self.account = account
+        self.transaction_type = transaction_type
+        self.amount = amount
+        self.process_transaction()
+
+    def process_transaction(self):
+        if self.transaction_type == "deposit":
+            self.account.deposit(self.amount)
+        elif self.transaction_type == "withdraw":
+            self.account.withdraw(self.amount)
+        else:
+            print("Invalid transaction type")
+
+    def display_transaction_info(self):
+        print(f"Transaction Type: {self.transaction_type}")
+        print(f"Amount: ${self.amount:.2f}")
+
+
+#test the functionality of the banking system
+#create a bank account
+account1 = BankAccount("123456", "John Doe", 1000)  
+account1.display_account_info()
+
+#deposit money into the account
+transaction1 = Transaction(account1, "deposit", 500)
+transaction1.display_transaction_info()
+
+#withdraw money from the account
+transaction2 = Transaction(account1, "withdraw", 200)
+transaction2.display_transaction_info()
+
+#display the updated account information
+account1.display_account_info() 
+
