@@ -1,0 +1,74 @@
+"""
+Project requirements
+A student database project that allows users to add, update, and view student information. The project should include the following features:
+1. Add a new student with their name, course name, and attendance percentage.
+2. Automatically generate a unique student ID for each new student.
+3. Store all student information in a list or database.
+4. Update a student's attendance percentage.
+5. Update a student's course name.
+6. Display all student information clearly for review.
+7.Calculate the average attendance percentage of all students in the database.
+8. Allow users to update a student's attendance percentage or course name by their student ID.
+
+author: Desi D 
+        student_ID 20267349
+"""
+
+import random #importing random module to generate random student IDs
+students = [] #list to store all student objects
+
+class Student: #the class Student is created to represent a student record with attributes name, course_name, attendance_percentage, and student_id
+    def __init__(self, name, course_name, attendance_percentage):       
+        self.name = name
+        self.course_name = course_name
+        self.attendance_percentage = attendance_percentage  
+        self.student_id = random.randint(1000, 9999) #generate random student ID between 1000 and 9999
+
+    def update_attendance(self, new_attendance_percentage):
+        self.attendance_percentage = new_attendance_percentage
+
+    def update_course(self, new_course_name):
+        self.course_name = new_course_name
+
+def display_students(students_list): #function to display all student information in a clear format
+    print("Student Information:")
+    for student in students_list:
+        print(f"Name: {student.name}, ID: {student.student_id}, Course: {student.course_name}, Attendance: {student.attendance_percentage}%")
+
+def calculate_average_attendance(students_list): #function to calculate the average attendance percentage of all students in the database
+    if len(students_list) == 0:
+        return 0
+    total_attendance = sum(student.attendance_percentage for student in students_list)
+    return total_attendance / len(students_list)  
+
+def update_student_by_id(students_list, key): #function to update a student's attendance percentage or course name by their student ID
+    for student in students_list:
+        if student.student_id == key:
+           student.update_attendance(int(input("Enter new attendance percentage: ")))
+           student.update_course(input("Enter new course name: "))
+           break
+            
+    else:
+        print("Student ID not found.")    
+
+#main program
+st1 = Student("John Doe", "Mathematics", 85)
+st2 = Student("Jane Smith", "Physics", 90)
+st3 = Student("Alice Johnson", "Chemistry", 95)
+#adding the student objects to the students list
+students.append(st1)
+students.append(st2)  
+students.append(st3)
+display_students(students)
+print("Average Attendance Percentage:", calculate_average_attendance(students), "%")
+st3.update_attendance(98) #updating attendance percentage for student 3
+st2.update_course("Biology") #updating course name for student 2
+print("\nAfter updates:")
+display_students(students)
+print("Average Attendance Percentage:", calculate_average_attendance(students), "%")
+#updating student information by ID
+key = int(input("Enter student ID to update: "))
+update_student_by_id(students, key)
+print("\nAfter updating student by ID:")
+display_students(students)
+print("Average Attendance Percentage:", calculate_average_attendance(students), "%")
